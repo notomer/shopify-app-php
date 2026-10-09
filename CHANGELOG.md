@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.3]
+
+- Treat an empty `oldClientSecret` as not set. Verify methods now use only `clientSecret` when `oldClientSecret` is an empty string.
+- Validate the shop before building request URLs. `exchangeUsingClientCredentials`, `refreshTokenExchangedAccessToken` and `adminGraphQLRequest` return an error when `shop` is not a valid shop name (e.g., `shop-name`). `exchangeUsingTokenExchange` builds the request URL from the validated shop name.
+- `appHomePatchIdToken` returns a 400 response when the `shop` query parameter is not a valid shop domain (e.g., `shop-name.myshopify.com`).
+
 ## [1.0.2]
 
 - Harden App Home Redirect URL handling.

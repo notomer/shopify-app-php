@@ -10,6 +10,7 @@ use Shopify\App\Types\TokenExchangeResult;
 use Shopify\App\Types\TokenExchangeAccessToken;
 use Shopify\App\Types\Log;
 use Shopify\App\Internal\Utils\InputConverters;
+use Shopify\App\Internal\Utils\Shop;
 use Shopify\App\Types\ResponseInfo;
 
 /**
@@ -104,6 +105,24 @@ class RefreshToken
                 log: new Log(
                     code: 'configuration_error',
                     detail: "Expected shop to be a non-empty string, but got ''"
+                ),
+                httpLogs: [],
+                response: new ResponseInfo(
+                    status: 500,
+                    body: '',
+                    headers: (object)[]
+                )
+            );
+        }
+
+        if (!Shop::isValidShopName($shop)) {
+            return new TokenExchangeResult(
+                ok: false,
+                shop: null,
+                accessToken: null,
+                log: new Log(
+                    code: 'configuration_error',
+                    detail: "Expected shop to be a valid shop domain (e.g., 'shop-name')"
                 ),
                 httpLogs: [],
                 response: new ResponseInfo(

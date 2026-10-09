@@ -6,6 +6,7 @@ namespace Shopify\App\Internal\Exchange;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use Shopify\App\Internal\Utils\Shop;
 use Shopify\App\Types\ClientCredentialsExchangeResult;
 use Shopify\App\Types\ClientCredentialsAccessToken;
 use Shopify\App\Types\Log;
@@ -45,7 +46,7 @@ class ClientCredentials
         }
 
         // Validate shop format (alphanumeric and hyphens only)
-        if (!preg_match('/^[a-zA-Z0-9][a-zA-Z0-9\-]*$/', $shop)) {
+        if (!Shop::isValidShopName($shop)) {
             return new ClientCredentialsExchangeResult(
                 ok: false,
                 shop: null,

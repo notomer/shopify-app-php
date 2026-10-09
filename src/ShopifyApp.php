@@ -65,7 +65,7 @@ class ShopifyApp
         $this->config = [
             'clientId' => $actualClientId,
             'clientSecret' => $actualClientSecret,
-            'oldClientSecret' => $actualOldClientSecret
+            'oldClientSecret' => $actualOldClientSecret === '' ? null : $actualOldClientSecret
         ];
     }
 

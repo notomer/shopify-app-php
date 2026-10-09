@@ -24,6 +24,7 @@ This package encodes the secure, correct way to build a Shopify app. Most of wha
   - [Verifying requests with exchangeable ID tokens](#verifying-requests-with-exchangeable-id-tokens)
   - [Navigating inside and outside the App Home iframe](#navigating-inside-and-outside-the-app-home-iframe)
   - [GraphQL requests](#graphql-requests)
+  - [Optional access scopes](#optional-access-scopes)
   - [Verifying requests without exchangeable ID tokens](#verifying-requests-without-exchangeable-id-tokens)
   - [Getting access tokens with client credentials](#getting-access-tokens-with-client-credentials)
 - [Common misuses to avoid](#common-misuses-to-avoid)
@@ -778,6 +779,14 @@ function processJob($shop)
 - `httpLogs`: List of HTTP request/response logs for debugging and monitoring.
 - `data`: The GraphQL response data, or `null` if the request failed.
 - `extensions`: The GraphQL extensions (e.g., cost information), or `null` if not present.
+
+### Optional access scopes
+
+Use [`adminGraphQLRequest`](#graphql-requests) on your server to query granted scopes or revoke optional scopes. Check the revoke mutation's `userErrors` even when the package result is `ok`.
+
+To request merchant approval, use App Bridge in embedded apps or Shopify's approval redirect in standalone apps.
+
+See [Manage access scopes](https://shopify.dev/docs/apps/build/authentication-authorization/manage-access-scopes) for configuration, deployment, examples, and grant rules.
 
 ### Verifying requests without exchangeable ID tokens
 

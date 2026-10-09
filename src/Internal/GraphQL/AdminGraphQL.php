@@ -6,6 +6,7 @@ namespace Shopify\App\Internal\GraphQL;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use Shopify\App\Internal\Utils\Shop;
 use Shopify\App\Types\GQLResult;
 use Shopify\App\Types\Log;
 use Shopify\App\Types\ResponseInfo;
@@ -38,6 +39,14 @@ class AdminGraphQL
             return self::createErrorResponse(
                 'missing_shop',
                 'Shop domain is required',
+                400
+            );
+        }
+
+        if (!Shop::isValidShopName($shop)) {
+            return self::createErrorResponse(
+                'invalid_shop',
+                "Expected shop to be a valid shop domain (e.g., 'shop-name')",
                 400
             );
         }

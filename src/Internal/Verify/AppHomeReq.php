@@ -243,7 +243,7 @@ class AppHomeReq
         $verificationError = null;
 
         $secretsToTry = [];
-        if ($oldClientSecret !== null) {
+        if ($oldClientSecret !== null && $oldClientSecret !== '') {
             $secretsToTry[] = $oldClientSecret;
         }
         $secretsToTry[] = $clientSecret;
